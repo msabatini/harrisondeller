@@ -1,0 +1,33 @@
+.about-container {
+  max-width: 900px;
+  margin: 12rem auto;
+  padding: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+}
+
+.about-content {
+  line-height: 1.8;
+}
+
+.bio-section {
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+}

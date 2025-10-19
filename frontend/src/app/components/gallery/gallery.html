@@ -1,0 +1,42 @@
+<div class="gallery-container">
+  <h1>Gallery</h1>
+
+  <div class="bodies-nav" *ngIf="bodies.length > 0">
+    <button 
+      *ngFor="let body of bodies" 
+      [class.active]="selectedBody?._id === body._id"
+      (click)="selectBody(body)"
+      class="body-btn">
+      {{ body.title }}
+    </button>
+  </div>
+
+  <div class="body-info" *ngIf="selectedBody">
+    <h2>{{ selectedBody.title }}</h2>
+    <p>{{ selectedBody.description }}</p>
+    <p class="year" *ngIf="selectedBody.year">{{ selectedBody.year }}</p>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading...</div>
+
+  <div class="artworks-grid" *ngIf="!loading && artworks.length > 0">
+    <div class="artwork-card" *ngFor="let artwork of artworks">
+      <img [src]="artwork.imageUrl" [alt]="artwork.title" />
+      <div class="artwork-info">
+        <h3>{{ artwork.title }}</h3>
+        <p *ngIf="artwork.year">{{ artwork.year }}</p>
+        <p *ngIf="artwork.medium">{{ artwork.medium }}</p>
+        <p *ngIf="artwork.dimensions">{{ artwork.dimensions }}</p>
+        <p *ngIf="artwork.description" class="description">{{ artwork.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-artworks" *ngIf="!loading && artworks.length === 0 && selectedBody">
+    <p>No artworks available in this collection yet.</p>
+  </div>
+
+  <div class="no-bodies" *ngIf="!loading && bodies.length === 0">
+    <p>No collections available yet.</p>
+  </div>
+</div>

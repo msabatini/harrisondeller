@@ -1,0 +1,33 @@
+<div class="music-container">
+  <h1>Music</h1>
+
+  <div class="loading" *ngIf="loading">Loading...</div>
+
+  <div class="music-grid" *ngIf="!loading && musicList.length > 0">
+    <div class="music-card" *ngFor="let music of musicList">
+      <div class="music-cover" *ngIf="music.coverImage">
+        <img [src]="music.coverImage" [alt]="music.title" />
+      </div>
+      <div class="music-info">
+        <h3>{{ music.title }}</h3>
+        <p *ngIf="music.artist" class="artist">{{ music.artist }}</p>
+        <p *ngIf="music.album" class="album">{{ music.album }}</p>
+        <p *ngIf="music.releaseYear" class="year">{{ music.releaseYear }}</p>
+      </div>
+      <div class="music-player" *ngIf="music.spotifyUrl">
+        <iframe 
+          [src]="getSpotifyEmbedUrl(music.spotifyUrl)" 
+          width="100%" 
+          height="80" 
+          frameborder="0" 
+          allowtransparency="true" 
+          allow="encrypted-media">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-music" *ngIf="!loading && musicList.length === 0">
+    <p>No music available yet. Check back soon!</p>
+  </div>
+</div>
