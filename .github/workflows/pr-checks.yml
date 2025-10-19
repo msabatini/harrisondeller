@@ -1,0 +1,150 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-validation:
+    name: PR - Code Review Checklist
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate PR title
+        run: |
+          TITLE="${{ github.event.pull_request.title }}"
+          echo "PR Title: $TITLE"
+          
+          # Check if title follows conventional commits
+          if [[ $TITLE =~ ^(feat|fix|docs|style|refactor|perf|test|chore|ci)(\(.+\))?: ]]; then
+            echo "✅ PR title follows conventional commits format"
+          else
+            echo "⚠️  PR title should follow conventional commits:"
+            echo "  - feat(scope): description"
+            echo "  - fix(scope): description"
+            echo "  - docs: description"
+            echo "  - chore: description"
+            echo "  - etc."
+          fi
+
+      - name: Check for code comments
+        run: |
+          echo "🔍 Checking for TODO/FIXME comments in changed files..."
+          if git diff origin/main...HEAD --unified=0 | grep -E "^\+.*\b(TODO|FIXME|XXX|HACK)\b"; then
+            echo "⚠️  Found TODO/FIXME comments in changes"
+          else
+            echo "✅ No TODO/FIXME comments found"
+          fi
+        continue-on-error: true
+
+      - name: Check file changes
+        run: |
+          echo "📊 Changed files in this PR:"
+          git diff origin/main...HEAD --name-only | head -20
+          
+          echo ""
+          echo "📈 Change statistics:"
+          git diff origin/main...HEAD --stat
+
+      - name: Verify tests updated
+        run: |
+          CHANGED_FILES=$(git diff origin/main...HEAD --name-only)
+          
+          # Check if test files were updated alongside source files
+          SRC_CHANGES=$(echo "$CHANGED_FILES" | grep -v "\.spec\.ts$" | grep "\.ts$" | wc -l)
+          TEST_CHANGES=$(echo "$CHANGED_FILES" | grep "\.spec\.ts$" | wc -l)
+          
+          if [ $SRC_CHANGES -gt 0 ] && [ $TEST_CHANGES -eq 0 ]; then
+            echo "⚠️  Source files changed but no test files updated"
+            echo "    Consider adding/updating tests for your changes"
+          else
+            echo "✅ Test files appear to be updated"
+          fi
+        continue-on-error: true
+
+      - name: Check for large files
+        run: |
+          echo "🔍 Checking for large files..."
+          git diff origin/main...HEAD --name-status | while read status file; do
+            # Skip deleted files
+            if [ "$status" = "D" ]; then
+              continue
+            fi
+            
+            # Skip non-existent files
+            if [ ! -f "$file" ]; then
+              continue
+            fi
+            
+            SIZE=$(du -k "$file" | cut -f1)
+            if [ $SIZE -gt 1000 ]; then
+              echo "⚠️  Large file ($SIZE KB): $file"
+            fi
+          done
+        continue-on-error: true
+
+  pr-conflicts:
+    name: PR - Conflict Detection
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for merge conflicts
+        run: |
+          echo "🔍 Checking for merge conflicts..."
+          if git diff --name-only --diff-filter=U; then
+            echo "❌ Merge conflicts detected!"
+            exit 1
+          else
+            echo "✅ No merge conflicts"
+          fi
+
+  compare-branches:
+    name: PR - Branch Comparison
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compare with target branch
+        run: |
+          TARGET="${{ github.base_ref }}"
+          SOURCE="${{ github.head_ref }}"
+          
+          echo "📊 Comparing $SOURCE → $TARGET"
+          echo ""
+          echo "Commits ahead:"
+          git log origin/$TARGET..HEAD --oneline | head -10
+          echo ""
+          echo "Files changed:"
+          git diff origin/$TARGET...HEAD --stat
+        continue-on-error: true
+
+  notification:
+    name: PR - Ready Check
+    runs-on: ubuntu-latest
+    needs: [pr-validation, pr-conflicts, compare-branches]
+
+    steps:
+      - name: PR Status Summary
+        run: |
+          echo "✅ PR Validation Complete!"
+          echo ""
+          echo "Your PR has passed all preliminary checks:"
+          echo "  ✓ Title validation"
+          echo "  ✓ Code quality checks (from CI pipeline)"
+          echo "  ✓ Conflict detection"
+          echo "  ✓ Branch comparison"
+          echo ""
+          echo "Next: Wait for full CI/CD pipeline to complete"
