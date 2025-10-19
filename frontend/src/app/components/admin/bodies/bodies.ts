@@ -60,7 +60,8 @@ export class BodiesComponent implements OnInit {
   openCreateDialog(): void {
     const dialogRef = this.dialog.open(BodyFormDialogComponent, {
       width: '600px',
-      data: null
+      data: null,
+      panelClass: 'body-form-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -73,7 +74,8 @@ export class BodiesComponent implements OnInit {
   openEditDialog(body: Body): void {
     const dialogRef = this.dialog.open(BodyFormDialogComponent, {
       width: '600px',
-      data: body
+      data: body,
+      panelClass: 'body-form-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {

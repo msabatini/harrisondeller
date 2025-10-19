@@ -1,13 +1,40 @@
 <div class="admin-container">
   <nav class="admin-nav">
-    <h2>Admin Panel</h2>
+    <div class="admin-header">
+      <h2>Creative Studio</h2>
+      <p class="subtitle">Harrison Deller's Collection Management</p>
+    </div>
+
     <ul class="admin-links">
-      <li><a routerLink="/admin/bodies" routerLinkActive="active">Bodies of Work</a></li>
-      <li><a routerLink="/admin/artworks" routerLinkActive="active">Artworks</a></li>
-      <li><a routerLink="/admin/music" routerLinkActive="active">Music</a></li>
-      <li><a routerLink="/admin/contacts" routerLinkActive="active">Contact Submissions</a></li>
+      <li>
+        <a routerLink="/admin/bodies" routerLinkActive="active" class="nav-link">
+          <img src="/assets/icons/bodies-of-work.svg" alt="Bodies of Work" class="icon">
+          <span class="label">Bodies of Work</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/artworks" routerLinkActive="active" class="nav-link">
+          <img src="/assets/icons/artwork.svg" alt="Artwork" class="icon">
+          <span class="label">Artwork</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/music" routerLinkActive="active" class="nav-link">
+          <img src="/assets/icons/music.svg" alt="Music" class="icon">
+          <span class="label">Music</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/contacts" routerLinkActive="active" class="nav-link">
+          <img src="/assets/icons/contact.svg" alt="Contact Submissions" class="icon">
+          <span class="label">Contact Submissions</span>
+        </a>
+      </li>
     </ul>
-    <button class="logout-btn" (click)="logout()">Logout</button>
+
+    <button class="logout-btn" (click)="logout()">
+      <span>Sign Out</span>
+    </button>
   </nav>
 
   <main class="admin-content">

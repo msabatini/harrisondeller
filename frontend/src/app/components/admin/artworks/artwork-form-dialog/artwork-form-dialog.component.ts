@@ -108,12 +108,20 @@ export class ArtworkFormDialogComponent implements OnInit {
       
       this.uploadService.uploadImage(file).subscribe({
         next: (response: any) => {
-          this.form.imageUrl = response.url;
+          if (response && response.url) {
+            this.form.imageUrl = response.url;
+            this.error = '';
+          } else {
+            console.error('Invalid response format:', response);
+            this.error = 'Failed to upload image: Invalid response format';
+          }
           this.uploading = false;
         },
         error: (err) => {
           console.error('Upload error:', err);
-          this.error = 'Failed to upload image';
+          // Log more detailed error information for debugging
+          const errorMessage = err?.error?.message || err?.message || 'Unknown error';
+          this.error = `Failed to upload image: ${errorMessage}`;
           this.uploading = false;
         }
       });

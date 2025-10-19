@@ -32,6 +32,10 @@
       <button type="submit" class="login-btn" [disabled]="loading">
         {{ loading ? 'Logging in...' : 'Login' }}
       </button>
+
+      <p class="register-link">
+        Don't have an account? <a routerLink="/admin/register">Create one here</a>
+      </p>
     </form>
   </div>
 </div>

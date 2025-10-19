@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 import { BodyService } from '../../../../services/body.service';
 import { Body, CreateBodyRequest } from '../../../../models/body.model';
 
@@ -21,7 +22,8 @@ import { Body, CreateBodyRequest } from '../../../../models/body.model';
     MatInputModule,
     MatButtonModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   templateUrl: './body-form-dialog.component.html',
   styleUrl: './body-form-dialog.component.scss'

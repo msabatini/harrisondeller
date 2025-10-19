@@ -1,30 +1,71 @@
-<h2 mat-dialog-title>{{ isEditMode ? 'Edit' : 'Create' }} Body of Work</h2>
+<div class="dialog-header">
+  <h2 class="dialog-title">{{ isEditMode ? 'Edit' : 'Create' }} Body of Work</h2>
+</div>
 
-<mat-dialog-content>
+<mat-dialog-content class="dialog-content">
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
   <form (ngSubmit)="onSubmit()" class="form">
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Title *</mat-label>
-      <input matInput [(ngModel)]="form.title" name="title" required>
-    </mat-form-field>
+    <div class="form-field-wrapper">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 3 6 h 8 l 2 2 h 8 v 12 h -18 z" fill="none"/>
+        <line x1="9" y1="11" x2="15" y2="11" opacity="0.6"/>
+        <line x1="9" y1="15" x2="15" y2="15" opacity="0.6"/>
+      </svg>
+      <mat-form-field appearance="fill" class="full-width custom-field">
+        <mat-label>Title *</mat-label>
+        <input matInput [(ngModel)]="form.title" name="title" required>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Description</mat-label>
-      <textarea matInput [(ngModel)]="form.description" name="description" rows="4"></textarea>
-    </mat-form-field>
+    <div class="form-field-wrapper">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="2" width="16" height="20" rx="1"/>
+        <line x1="7" y1="7" x2="17" y2="7"/>
+        <line x1="7" y1="11" x2="17" y2="11"/>
+        <line x1="7" y1="15" x2="14" y2="15"/>
+      </svg>
+      <mat-form-field appearance="fill" class="full-width custom-field">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="form.description" name="description" rows="4"></textarea>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill" class="form-row">
-      <mat-label>Year</mat-label>
-      <input matInput type="number" [(ngModel)]="form.year" name="year">
-    </mat-form-field>
+    <div class="form-row-container">
+      <div class="form-field-wrapper form-row">
+        <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="1"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+          <line x1="7" y1="4" x2="7" y2="2"/>
+          <line x1="17" y1="4" x2="17" y2="2"/>
+          <circle cx="9" cy="15" r="1.5" fill="white" opacity="0.6"/>
+          <circle cx="15" cy="15" r="1.5" fill="white" opacity="0.6"/>
+        </svg>
+        <mat-form-field appearance="fill" class="custom-field">
+          <mat-label>Year</mat-label>
+          <input matInput type="number" [(ngModel)]="form.year" name="year">
+        </mat-form-field>
+      </div>
 
-    <mat-form-field appearance="fill" class="form-row">
-      <mat-label>Order</mat-label>
-      <input matInput type="number" [(ngModel)]="form.order" name="order" required>
-    </mat-form-field>
+      <div class="form-field-wrapper form-row">
+        <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
+          <polyline points="18 4 20 6 18 8" fill="none"/>
+        </svg>
+        <mat-form-field appearance="fill" class="custom-field">
+          <mat-label>Order</mat-label>
+          <input matInput type="number" [(ngModel)]="form.order" name="order" required>
+        </mat-form-field>
+      </div>
+    </div>
 
     <div class="toggle-group">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3" fill="none"/>
+        <path d="M 12 5 C 7 5 3 9 2 12 c 1 3 5 7 10 7 s 9 -4 10 -7 c -1 -3 -5 -7 -10 -7"/>
+      </svg>
       <mat-slide-toggle [(ngModel)]="form.published" name="published">
         Published
       </mat-slide-toggle>
@@ -33,10 +74,9 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="onCancel()" [disabled]="loading">Cancel</button>
+  <button class="cancel-btn" (click)="onCancel()" [disabled]="loading">Cancel</button>
   <button 
-    mat-raised-button 
-    color="primary" 
+    class="submit-btn"
     (click)="onSubmit()" 
     [disabled]="loading || !form.title.trim()">
     <span *ngIf="!loading">{{ isEditMode ? 'Update' : 'Create' }}</span>

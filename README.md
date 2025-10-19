@@ -269,7 +269,7 @@ npm run lint           # Lint the code
 
 ## License
 
-Copyright © 2025 Harrison Deller. All rights reserved.
+Copyright © 2025 Harrison Deller Art. All rights reserved.
 
 ## Support
 

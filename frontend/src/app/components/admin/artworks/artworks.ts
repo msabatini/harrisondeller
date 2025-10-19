@@ -60,7 +60,8 @@ export class ArtworksComponent implements OnInit {
   openCreateDialog(): void {
     const dialogRef = this.dialog.open(ArtworkFormDialogComponent, {
       width: '700px',
-      data: null
+      data: null,
+      panelClass: 'artwork-form-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -73,7 +74,8 @@ export class ArtworksComponent implements OnInit {
   openEditDialog(artwork: Artwork): void {
     const dialogRef = this.dialog.open(ArtworkFormDialogComponent, {
       width: '700px',
-      data: artwork
+      data: artwork,
+      panelClass: 'artwork-form-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {

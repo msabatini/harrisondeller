@@ -6,8 +6,9 @@
         <strong>{{ getUnreadCount() }}</strong> unread submission<span *ngIf="getUnreadCount() !== 1">s</span>
       </p>
     </div>
-    <button mat-raised-button color="accent" (click)="loadContacts()" [disabled]="loading">
-      <mat-icon>refresh</mat-icon> Refresh
+    <button class="refresh-btn" (click)="loadContacts()" [disabled]="loading">
+      <img src="/assets/icons/refresh.svg" alt="Refresh" class="refresh-icon" />
+      <span>Refresh</span>
     </button>
   </div>
 

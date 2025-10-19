@@ -1,0 +1,6 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Spotify-inspired note -->
+  <circle cx="12" cy="12" r="9" fill="none" opacity="0.6"/>
+  <path d="M 10 8 l 6 4 l -6 4 z" fill="white" opacity="0.6"/>
+  <circle cx="12" cy="12" r="3" fill="none"/>
+</svg>

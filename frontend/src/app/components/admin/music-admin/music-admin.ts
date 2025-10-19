@@ -60,7 +60,8 @@ export class MusicAdminComponent implements OnInit {
   openCreateDialog(): void {
     const dialogRef = this.dialog.open(MusicFormDialogComponent, {
       width: '600px',
-      data: null
+      data: null,
+      panelClass: 'music-form-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -73,7 +74,8 @@ export class MusicAdminComponent implements OnInit {
   openEditDialog(music: Music): void {
     const dialogRef = this.dialog.open(MusicFormDialogComponent, {
       width: '600px',
-      data: music
+      data: music,
+      panelClass: 'music-form-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {

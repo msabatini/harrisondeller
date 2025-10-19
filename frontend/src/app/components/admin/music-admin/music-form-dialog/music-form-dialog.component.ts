@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 import { MusicService } from '../../../../services/music.service';
 import { Music, CreateMusicRequest } from '../../../../models/music.model';
 
@@ -21,7 +22,8 @@ import { Music, CreateMusicRequest } from '../../../../models/music.model';
     MatInputModule,
     MatButtonModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   templateUrl: './music-form-dialog.component.html',
   styleUrl: './music-form-dialog.component.scss'

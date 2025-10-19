@@ -1,0 +1,8 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Envelope -->
+  <rect x="2" y="5" width="20" height="12" rx="1"/>
+  <!-- Flap with brushstroke -->
+  <path d="M 2 5 L 12 13 L 22 5" fill="none"/>
+  <!-- Decorative flowing line inside -->
+  <path d="M 4 9 Q 12 11 20 9" opacity="0.6"/>
+</svg>

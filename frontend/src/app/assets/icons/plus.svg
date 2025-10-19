@@ -1,0 +1,12 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Plus with brushstroke styling -->
+  <g>
+    <!-- Horizontal line with slight curve -->
+    <path d="M 5 12 L 19 12"/>
+    <!-- Vertical line -->
+    <line x1="12" y1="5" x2="12" y2="19"/>
+    <!-- Subtle decorative corner accents -->
+    <circle cx="5" cy="12" r="0.8" fill="white" opacity="0.5"/>
+    <circle cx="19" cy="12" r="0.8" fill="white" opacity="0.5"/>
+  </g>
+</svg>

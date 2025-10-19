@@ -1,50 +1,121 @@
-<h2 mat-dialog-title>{{ isEditMode ? 'Edit' : 'Create' }} Music</h2>
+<div class="dialog-header">
+  <h2 class="dialog-title">{{ isEditMode ? 'Edit' : 'Create' }} Music</h2>
+</div>
 
-<mat-dialog-content>
+<mat-dialog-content class="dialog-content">
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
   <form (ngSubmit)="onSubmit()" class="form">
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Title *</mat-label>
-      <input matInput [(ngModel)]="form.title" name="title" required>
-    </mat-form-field>
+    <div class="form-field-wrapper">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="7" cy="16" rx="1.2" ry="1.5" fill="white"/>
+        <line x1="8.2" y1="16" x2="8.2" y2="6"/>
+        <ellipse cx="13" cy="14" rx="1.2" ry="1.5" fill="white"/>
+        <line x1="14.2" y1="14" x2="14.2" y2="4"/>
+        <path d="M 8.2 6 Q 10 5 14.2 4"/>
+        <path d="M 5 18 Q 12 20 18 17" opacity="0.6"/>
+      </svg>
+      <mat-form-field appearance="fill" class="full-width custom-field">
+        <mat-label>Title *</mat-label>
+        <input matInput [(ngModel)]="form.title" name="title" required>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Artist</mat-label>
-      <input matInput [(ngModel)]="form.artist" name="artist">
-    </mat-form-field>
+    <div class="form-field-wrapper">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="6" r="2.5"/>
+        <path d="M 12 9 c -3 0 -4.5 2 -4.5 4 v 5 h 9 v -5 c 0 -2 -1.5 -4 -4.5 -4"/>
+      </svg>
+      <mat-form-field appearance="fill" class="full-width custom-field">
+        <mat-label>Artist</mat-label>
+        <input matInput [(ngModel)]="form.artist" name="artist">
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Album</mat-label>
-      <input matInput [(ngModel)]="form.album" name="album">
-    </mat-form-field>
+    <div class="form-field-wrapper">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9" fill="none"/>
+        <circle cx="12" cy="12" r="5" fill="none"/>
+        <circle cx="12" cy="12" r="2" fill="white"/>
+      </svg>
+      <mat-form-field appearance="fill" class="full-width custom-field">
+        <mat-label>Album</mat-label>
+        <input matInput [(ngModel)]="form.album" name="album">
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill" class="form-row">
-      <mat-label>Release Year</mat-label>
-      <input matInput type="number" [(ngModel)]="form.releaseYear" name="releaseYear">
-    </mat-form-field>
+    <div class="form-row-container">
+      <div class="form-field-wrapper form-row">
+        <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="1"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+          <line x1="7" y1="4" x2="7" y2="2"/>
+          <line x1="17" y1="4" x2="17" y2="2"/>
+          <circle cx="9" cy="15" r="1.5" fill="white" opacity="0.6"/>
+          <circle cx="15" cy="15" r="1.5" fill="white" opacity="0.6"/>
+        </svg>
+        <mat-form-field appearance="fill" class="custom-field">
+          <mat-label>Release Year</mat-label>
+          <input matInput type="number" [(ngModel)]="form.releaseYear" name="releaseYear">
+        </mat-form-field>
+      </div>
 
-    <mat-form-field appearance="fill" class="form-row">
-      <mat-label>Order</mat-label>
-      <input matInput type="number" [(ngModel)]="form.order" name="order" required>
-    </mat-form-field>
+      <div class="form-field-wrapper form-row">
+        <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
+          <polyline points="18 4 20 6 18 8" fill="none"/>
+        </svg>
+        <mat-form-field appearance="fill" class="custom-field">
+          <mat-label>Order</mat-label>
+          <input matInput type="number" [(ngModel)]="form.order" name="order" required>
+        </mat-form-field>
+      </div>
+    </div>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Spotify URL</mat-label>
-      <input matInput [(ngModel)]="form.spotifyUrl" name="spotifyUrl" type="url">
-    </mat-form-field>
+    <div class="form-field-wrapper">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9" fill="none" opacity="0.6"/>
+        <path d="M 10 8 l 6 4 l -6 4 z" fill="white" opacity="0.6"/>
+        <circle cx="12" cy="12" r="3" fill="none"/>
+      </svg>
+      <mat-form-field appearance="fill" class="full-width custom-field">
+        <mat-label>Spotify URL</mat-label>
+        <input matInput [(ngModel)]="form.spotifyUrl" name="spotifyUrl" type="url">
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Audio URL</mat-label>
-      <input matInput [(ngModel)]="form.audioUrl" name="audioUrl" type="url">
-    </mat-form-field>
+    <div class="form-field-wrapper">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 4 4 h 10 l 6 6 v 10 h -16 z" fill="none"/>
+        <path d="M 14 4 v 6 h 6"/>
+        <path d="M 8 14 q 0 -1.5 1.5 -1.5 q 1.5 0 1.5 1.5" opacity="0.6"/>
+        <path d="M 12 14 q 0 -1 1 -1 q 1 0 1 1" opacity="0.6"/>
+      </svg>
+      <mat-form-field appearance="fill" class="full-width custom-field">
+        <mat-label>Audio URL</mat-label>
+        <input matInput [(ngModel)]="form.audioUrl" name="audioUrl" type="url">
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Cover Image URL</mat-label>
-      <input matInput [(ngModel)]="form.coverImage" name="coverImage" type="url">
-    </mat-form-field>
+    <div class="form-field-wrapper">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="16" rx="1"/>
+        <circle cx="8" cy="9" r="1.5" fill="white" opacity="0.6"/>
+        <path d="M 3 16 l 5 -5 l 4 4 l 8 -8" fill="none"/>
+      </svg>
+      <mat-form-field appearance="fill" class="full-width custom-field">
+        <mat-label>Cover Image URL</mat-label>
+        <input matInput [(ngModel)]="form.coverImage" name="coverImage" type="url">
+      </mat-form-field>
+    </div>
 
     <div class="toggle-group">
+      <svg class="field-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3" fill="none"/>
+        <path d="M 12 5 C 7 5 3 9 2 12 c 1 3 5 7 10 7 s 9 -4 10 -7 c -1 -3 -5 -7 -10 -7"/>
+      </svg>
       <mat-slide-toggle [(ngModel)]="form.published" name="published">
         Published
       </mat-slide-toggle>
@@ -53,10 +124,9 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="onCancel()" [disabled]="loading">Cancel</button>
+  <button class="cancel-btn" (click)="onCancel()" [disabled]="loading">Cancel</button>
   <button 
-    mat-raised-button 
-    color="primary" 
+    class="submit-btn"
     (click)="onSubmit()" 
     [disabled]="loading || !form.title.trim()">
     <span *ngIf="!loading">{{ isEditMode ? 'Update' : 'Create' }}</span>
