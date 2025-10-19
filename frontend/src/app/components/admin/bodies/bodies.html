@@ -1,5 +1,68 @@
 <div class="admin-section">
-  <h2>Manage Bodies of Work</h2>
-  <p>Admin interface for managing bodies of work will be implemented here.</p>
-  <p>Features: Create, Read, Update, Delete bodies of work collections.</p>
+  <div class="section-header">
+    <h2>Manage Bodies of Work</h2>
+    <button mat-raised-button color="primary" (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon> Add Body of Work
+    </button>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div *ngIf="!loading && bodies.length > 0" class="table-container">
+    <table mat-table [dataSource]="bodies" class="bodies-table">
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <!-- Year Column -->
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>Year</th>
+        <td mat-cell *matCellDef="let element">{{ element.year || '—' }}</td>
+      </ng-container>
+
+      <!-- Published Column -->
+      <ng-container matColumnDef="published">
+        <th mat-header-cell *matHeaderCellDef>Published</th>
+        <td mat-cell *matCellDef="let element">
+          <span [class.published]="element.published" [class.draft]="!element.published">
+            {{ element.published ? 'Published' : 'Draft' }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Order Column -->
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef>Order</th>
+        <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element" class="actions-cell">
+          <button mat-icon-button color="accent" (click)="openEditDialog(element)" matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteBody(element._id)" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div *ngIf="!loading && bodies.length === 0" class="empty-state">
+    <p>No bodies of work yet. Create one to get started!</p>
+  </div>
 </div>

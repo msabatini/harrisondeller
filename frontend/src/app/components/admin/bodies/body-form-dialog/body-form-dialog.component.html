@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit' : 'Create' }} Body of Work</h2>
+
+<mat-dialog-content>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <form (ngSubmit)="onSubmit()" class="form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Title *</mat-label>
+      <input matInput [(ngModel)]="form.title" name="title" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="form.description" name="description" rows="4"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-row">
+      <mat-label>Year</mat-label>
+      <input matInput type="number" [(ngModel)]="form.year" name="year">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-row">
+      <mat-label>Order</mat-label>
+      <input matInput type="number" [(ngModel)]="form.order" name="order" required>
+    </mat-form-field>
+
+    <div class="toggle-group">
+      <mat-slide-toggle [(ngModel)]="form.published" name="published">
+        Published
+      </mat-slide-toggle>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()" [disabled]="loading">Cancel</button>
+  <button 
+    mat-raised-button 
+    color="primary" 
+    (click)="onSubmit()" 
+    [disabled]="loading || !form.title.trim()">
+    <span *ngIf="!loading">{{ isEditMode ? 'Update' : 'Create' }}</span>
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+  </button>
+</mat-dialog-actions>

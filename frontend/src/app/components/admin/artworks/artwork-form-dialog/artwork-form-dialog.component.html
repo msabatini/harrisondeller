@@ -1,0 +1,98 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit' : 'Create' }} Artwork</h2>
+
+<mat-dialog-content>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <form (ngSubmit)="onSubmit()" class="form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Title *</mat-label>
+      <input matInput [(ngModel)]="form.title" name="title" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Body of Work *</mat-label>
+      <mat-select [(ngModel)]="form.bodyId" name="bodyId" required>
+        <mat-option value="">Select a body of work...</mat-option>
+        <mat-option *ngFor="let body of bodies" [value]="body._id">
+          {{ body.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="form.description" name="description" rows="3"></textarea>
+    </mat-form-field>
+
+    <div class="form-row-container">
+      <mat-form-field appearance="fill" class="form-row">
+        <mat-label>Year</mat-label>
+        <input matInput type="number" [(ngModel)]="form.year" name="year">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-row">
+        <mat-label>Order</mat-label>
+        <input matInput type="number" [(ngModel)]="form.order" name="order" required>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Medium (e.g., Oil on Canvas)</mat-label>
+      <input matInput [(ngModel)]="form.medium" name="medium">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Dimensions (e.g., 24" x 36")</mat-label>
+      <input matInput [(ngModel)]="form.dimensions" name="dimensions">
+    </mat-form-field>
+
+    <!-- Image Upload Section -->
+    <div class="image-upload-section">
+      <div class="image-upload-label">Upload Image *</div>
+      
+      <div *ngIf="imagePreview" class="image-preview">
+        <img [src]="imagePreview" alt="Preview">
+        <button type="button" mat-button (click)="fileInput.click()" [disabled]="uploading">
+          <mat-icon>photo_camera</mat-icon> Change Image
+        </button>
+      </div>
+
+      <div *ngIf="!imagePreview" class="image-upload-box" (click)="fileInput.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        <p>Click to upload image</p>
+        <small>Supported formats: JPG, PNG, GIF, WebP (max 10MB)</small>
+      </div>
+
+      <input 
+        #fileInput 
+        type="file" 
+        hidden 
+        accept="image/*"
+        (change)="onFileSelected($event)"
+        [disabled]="uploading">
+
+      <div *ngIf="uploading" class="uploading">
+        <mat-spinner diameter="20"></mat-spinner>
+        <span>Uploading...</span>
+      </div>
+    </div>
+
+    <div class="toggle-group">
+      <mat-slide-toggle [(ngModel)]="form.published" name="published">
+        Published
+      </mat-slide-toggle>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()" [disabled]="loading || uploading">Cancel</button>
+  <button 
+    mat-raised-button 
+    color="primary" 
+    (click)="onSubmit()" 
+    [disabled]="loading || uploading || !form.title.trim() || !form.imageUrl || !form.bodyId">
+    <span *ngIf="!loading">{{ isEditMode ? 'Update' : 'Create' }}</span>
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+  </button>
+</mat-dialog-actions>

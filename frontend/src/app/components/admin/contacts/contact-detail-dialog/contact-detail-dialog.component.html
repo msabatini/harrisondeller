@@ -1,0 +1,89 @@
+<h2 mat-dialog-title>Contact Submission from {{ contact.name }}</h2>
+
+<mat-dialog-content>
+  <div class="contact-detail">
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <div class="info-group">
+        <label>Name:</label>
+        <p>{{ contact.name }}</p>
+      </div>
+
+      <div class="info-group">
+        <label>Email:</label>
+        <div class="email-with-copy">
+          <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+          <button 
+            mat-icon-button 
+            (click)="copyEmail()" 
+            matTooltip="Copy email"
+            type="button">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="info-group">
+        <label>Subject:</label>
+        <p>{{ contact.subject || '(no subject)' }}</p>
+      </div>
+
+      <div class="info-group">
+        <label>Received:</label>
+        <p>{{ formatDate(contact.createdAt) }}</p>
+      </div>
+
+      <div class="info-group">
+        <label>Status:</label>
+        <p>
+          <span [class.badge-read]="contact.read" [class.badge-unread]="!contact.read" class="status-badge">
+            {{ contact.read ? 'Read' : 'Unread' }}
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div class="message-section">
+      <h3>Message</h3>
+      <div class="message-box">
+        {{ contact.message }}
+      </div>
+    </div>
+
+    <!-- Reply Section -->
+    <div class="reply-section">
+      <h3>Send Reply</h3>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
+      
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Your reply...</mat-label>
+        <textarea 
+          matInput 
+          [(ngModel)]="replyMessage" 
+          rows="5"
+          placeholder="Type your reply message here...">
+        </textarea>
+      </mat-form-field>
+
+      <div class="reply-hint">
+        <mat-icon>info</mat-icon>
+        <span>Reply will be sent to: {{ contact.email }}</span>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onClose()" [disabled]="replySending">Close</button>
+  <button 
+    mat-raised-button 
+    color="primary" 
+    (click)="sendReply()" 
+    [disabled]="replySending || !replyMessage.trim()">
+    <span *ngIf="!replySending">
+      <mat-icon>send</mat-icon> Send Reply
+    </span>
+    <mat-spinner *ngIf="replySending" diameter="20"></mat-spinner>
+  </button>
+</mat-dialog-actions>

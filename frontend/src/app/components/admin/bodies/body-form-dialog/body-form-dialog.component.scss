@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-row {
+  width: 48%;
+  display: inline-block;
+
+  &:first-of-type {
+    margin-right: 2%;
+  }
+}
+
+.toggle-group {
+  margin: 16px 0;
+}
+
+.error-message {
+  color: #f44336;
+  padding: 12px;
+  background-color: #ffebee;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 16px;
+  border-top: 1px solid #e0e0e0;
+}
