@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { BodyService } from '../../services/body.service';
 import { ArtworkService } from '../../services/artwork.service';
 import { Body } from '../../models/body.model';
@@ -7,7 +8,7 @@ import { Artwork } from '../../models/artwork.model';
 
 @Component({
   selector: 'app-gallery',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss'
 })
@@ -21,7 +22,8 @@ export class GalleryComponent implements OnInit {
 
   constructor(
     private bodyService: BodyService,
-    private artworkService: ArtworkService
+    private artworkService: ArtworkService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -77,5 +79,9 @@ export class GalleryComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  viewArtwork(artworkId: string): void {
+    this.router.navigate(['/gallery/artwork', artworkId]);
   }
 }

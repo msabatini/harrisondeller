@@ -27,7 +27,7 @@
   <div class="loading" *ngIf="loading">Loading...</div>
 
   <div class="artworks-grid" *ngIf="!loading && artworks.length > 0">
-    <div class="artwork-card" *ngFor="let artwork of artworks">
+    <div class="artwork-card" *ngFor="let artwork of artworks" (click)="viewArtwork(artwork._id)">
       <img [src]="artwork.imageUrl" [alt]="artwork.title" class="artwork-image" />
       <div class="artwork-info">
         <h3>{{ artwork.title }}</h3>

@@ -1,0 +1,83 @@
+<div class="artwork-detail-container">
+  <!-- Loading State -->
+  <div class="loading" *ngIf="loading">
+    <p>Loading artwork...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="error" *ngIf="error && !loading">
+    <p>{{ error }}</p>
+    <button (click)="goBack()" class="btn-back">Back to Gallery</button>
+  </div>
+
+  <!-- Artwork Content -->
+  <div class="artwork-content" *ngIf="artwork && !loading">
+    <!-- Header with back button -->
+    <div class="detail-header">
+      <button (click)="goBack()" class="btn-back">← Back to Gallery</button>
+      <div class="breadcrumb" *ngIf="body">
+        <span>{{ body.title }}</span>
+      </div>
+    </div>
+
+    <!-- Main artwork section -->
+    <div class="main-artwork">
+      <div class="artwork-image">
+        <img [src]="artwork.imageUrl" [alt]="artwork.title" />
+      </div>
+
+      <div class="artwork-details">
+        <h1>{{ artwork.title }}</h1>
+
+        <div class="info-grid">
+          <div class="info-item" *ngIf="artwork.year">
+            <span class="label">Year</span>
+            <span class="value">{{ artwork.year }}</span>
+          </div>
+
+          <div class="info-item" *ngIf="artwork.medium">
+            <span class="label">Medium</span>
+            <span class="value">{{ artwork.medium }}</span>
+          </div>
+
+          <div class="info-item" *ngIf="artwork.dimensions">
+            <span class="label">Dimensions</span>
+            <span class="value">{{ artwork.dimensions }}</span>
+          </div>
+
+          <div class="info-item" *ngIf="body">
+            <span class="label">Collection</span>
+            <span class="value">{{ body.title }}</span>
+          </div>
+        </div>
+
+        <div class="description" *ngIf="artwork.description">
+          <h3>About this work</h3>
+          <p>{{ artwork.description }}</p>
+        </div>
+
+        <div class="collection-description" *ngIf="body && body.description">
+          <h3>About {{ body.title }}</h3>
+          <p>{{ body.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Artworks -->
+    <div class="related-artworks" *ngIf="relatedArtworks.length > 0">
+      <h2>More from this collection</h2>
+      <div class="related-grid">
+        <div 
+          class="related-card" 
+          *ngFor="let related of relatedArtworks"
+          (click)="navigateToArtwork(related._id)">
+          <img [src]="related.imageUrl" [alt]="related.title" />
+          <div class="related-info">
+            <h4>{{ related.title }}</h4>
+            <p *ngIf="related.year">{{ related.year }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
