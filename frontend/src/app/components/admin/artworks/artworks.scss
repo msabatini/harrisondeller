@@ -21,6 +21,8 @@
       .icon {
         width: 20px;
         height: 20px;
+        position: relative;
+        top: 4px;
       }
 
       span {
@@ -57,6 +59,16 @@
         font-weight: 600;
         background-color: #f5f5f5;
         color: #333;
+      }
+
+      tr {
+        &:nth-child(odd) {
+          background-color: #ffffff;
+        }
+
+        &:nth-child(even) {
+          background-color: #f9f9f9;
+        }
       }
 
       td {
@@ -116,20 +128,20 @@
           }
 
           &.edit-btn {
-            color: #1976d2;
+            color: #000000;
 
             &:hover {
-              background-color: rgba(25, 118, 210, 0.08);
-              border-color: rgba(25, 118, 210, 0.2);
+              background-color: rgba(0, 0, 0, 0.08);
+              border-color: rgba(0, 0, 0, 0.2);
             }
           }
 
           &.delete-btn {
-            color: #d32f2f;
+            color: #000000;
 
             &:hover {
-              background-color: rgba(211, 47, 47, 0.08);
-              border-color: rgba(211, 47, 47, 0.2);
+              background-color: rgba(0, 0, 0, 0.08);
+              border-color: rgba(0, 0, 0, 0.2);
             }
           }
         }

@@ -49,10 +49,10 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element" class="actions-cell">
-          <button class="icon-btn edit-btn" (click)="openEditDialog(element)" matTooltip="Edit" type="button">
+          <button class="icon-btn edit-btn" (click)="openEditDialog(element)" type="button">
             <img src="/assets/icons/edit.svg" alt="Edit" class="action-icon">
           </button>
-          <button class="icon-btn delete-btn" (click)="deleteBody(element._id)" matTooltip="Delete" type="button">
+          <button class="icon-btn delete-btn" (click)="deleteBody(element._id)" type="button">
             <img src="/assets/icons/delete.svg" alt="Delete" class="action-icon">
           </button>
         </td>

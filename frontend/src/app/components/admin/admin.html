@@ -1,5 +1,20 @@
 <div class="admin-container">
-  <nav class="admin-nav">
+  <!-- Mobile backdrop overlay -->
+  <div class="sidebar-backdrop" 
+       *ngIf="sidebarOpen" 
+       (click)="closeSidebar()">
+  </div>
+
+  <nav class="admin-nav" [class.open]="sidebarOpen">
+    <!-- Close button in upper right of sidebar (mobile only) -->
+    <button class="sidebar-close-btn" 
+            *ngIf="sidebarOpen"
+            (click)="closeSidebar()"
+            aria-label="Close navigation menu">
+      <span></span>
+      <span></span>
+    </button>
+
     <div class="admin-header">
       <h2>Creative Studio</h2>
       <p class="subtitle">Harrison Deller's Collection Management</p>
@@ -7,25 +22,25 @@
 
     <ul class="admin-links">
       <li>
-        <a routerLink="/admin/bodies" routerLinkActive="active" class="nav-link">
+        <a routerLink="/admin/bodies" routerLinkActive="active" class="nav-link" (click)="closeSidebar()">
           <img src="/assets/icons/bodies-of-work.svg" alt="Bodies of Work" class="icon">
           <span class="label">Bodies of Work</span>
         </a>
       </li>
       <li>
-        <a routerLink="/admin/artworks" routerLinkActive="active" class="nav-link">
+        <a routerLink="/admin/artworks" routerLinkActive="active" class="nav-link" (click)="closeSidebar()">
           <img src="/assets/icons/artwork.svg" alt="Artwork" class="icon">
           <span class="label">Artwork</span>
         </a>
       </li>
       <li>
-        <a routerLink="/admin/music" routerLinkActive="active" class="nav-link">
+        <a routerLink="/admin/music" routerLinkActive="active" class="nav-link" (click)="closeSidebar()">
           <img src="/assets/icons/music.svg" alt="Music" class="icon">
           <span class="label">Music</span>
         </a>
       </li>
       <li>
-        <a routerLink="/admin/contacts" routerLinkActive="active" class="nav-link">
+        <a routerLink="/admin/contacts" routerLinkActive="active" class="nav-link" (click)="closeSidebar()">
           <img src="/assets/icons/contact.svg" alt="Contact Submissions" class="icon">
           <span class="label">Contact Submissions</span>
         </a>
@@ -38,6 +53,16 @@
   </nav>
 
   <main class="admin-content">
+    <!-- Open menu button (mobile only) -->
+    <button class="menu-toggle-btn" 
+            *ngIf="!sidebarOpen"
+            (click)="toggleSidebar()"
+            aria-label="Open navigation menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    
     <router-outlet></router-outlet>
   </main>
 </div>

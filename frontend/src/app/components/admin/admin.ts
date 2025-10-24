@@ -10,10 +10,20 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './admin.scss'
 })
 export class AdminComponent {
+  sidebarOpen = false;
+
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
+
+  toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  closeSidebar(): void {
+    this.sidebarOpen = false;
+  }
 
   logout(): void {
     this.authService.logout();
