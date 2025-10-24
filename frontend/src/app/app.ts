@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,25 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements OnInit {
   title = 'Harrison Deller';
   menuOpen = false;
   isScrolled = false;
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    // Auto-scroll to top on route navigation
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'auto'
+        });
+      });
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
