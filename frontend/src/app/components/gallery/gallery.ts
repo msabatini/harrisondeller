@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BodyService } from '../../services/body.service';
 import { ArtworkService } from '../../services/artwork.service';
@@ -12,10 +12,12 @@ import { Artwork } from '../../models/artwork.model';
   styleUrl: './gallery.scss'
 })
 export class GalleryComponent implements OnInit {
+  @ViewChild('heroImage') heroImage!: ElementRef;
   bodies: Body[] = [];
   selectedBody: Body | null = null;
   artworks: Artwork[] = [];
   loading = false;
+  parallaxOffset = 0;
 
   constructor(
     private bodyService: BodyService,
@@ -24,6 +26,21 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBodies();
+    this.updateParallax();
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    this.updateParallax();
+  }
+
+  private updateParallax(): void {
+    const scrollPosition = window.scrollY;
+    this.parallaxOffset = scrollPosition * 0.5;
+
+    if (this.heroImage && this.heroImage.nativeElement) {
+      this.heroImage.nativeElement.style.transform = `translateY(${this.parallaxOffset}px)`;
+    }
   }
 
   loadBodies(): void {

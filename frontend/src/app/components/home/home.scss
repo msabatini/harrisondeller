@@ -9,6 +9,8 @@
   background-position: center;
   text-align: center;
   position: relative;
+  will-change: background-position;
+  overflow: hidden;
 }
 
 .hero-content {
