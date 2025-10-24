@@ -11,10 +11,10 @@
     </button>
     
     <ul class="nav-links" [class.open]="menuOpen">
-      <li><a routerLink="/gallery" routerLinkActive="active" (click)="closeMenu()">Work</a></li>
-      <li><a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a></li>
-      <li><a routerLink="/music" routerLinkActive="active" (click)="closeMenu()">Music</a></li>
-      <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
+      <li routerLink="/gallery" routerLinkActive="active" (click)="closeMenu()"><a>Work</a></li>
+      <li routerLink="/about" routerLinkActive="active" (click)="closeMenu()"><a>About</a></li>
+      <li routerLink="/music" routerLinkActive="active" (click)="closeMenu()"><a>Music</a></li>
+      <li routerLink="/contact" routerLinkActive="active" (click)="closeMenu()"><a>Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -41,9 +41,24 @@
     <div class="footer-section">
       <h4>Connect</h4>
       <ul>
-        <li><a href="mailto:contact@harrisondeller.com">Email</a></li>
-        <li><a href="#" target="_blank">Instagram</a></li>
-        <li><a href="#" target="_blank">Spotify</a></li>
+        <li>
+          <a href="mailto:contact@harrisondeller.com" class="social-link">
+            <img src="assets/icons/contact.svg" alt="Email" class="social-icon" />
+            Email
+          </a>
+        </li>
+        <li>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link">
+            <img src="assets/icons/instagram.svg" alt="Instagram" class="social-icon" />
+            Instagram
+          </a>
+        </li>
+        <li>
+          <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer" class="social-link">
+            <img src="assets/icons/spotify.svg" alt="Spotify" class="social-icon" />
+            Spotify
+          </a>
+        </li>
       </ul>
     </div>
   </div>
