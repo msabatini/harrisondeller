@@ -28,12 +28,12 @@
 
   <div class="artworks-grid" *ngIf="!loading && artworks.length > 0">
     <div class="artwork-card" *ngFor="let artwork of artworks">
-      <img [src]="artwork.imageUrl" [alt]="artwork.title" />
+      <img [src]="artwork.imageUrl" [alt]="artwork.title" class="artwork-image" />
       <div class="artwork-info">
         <h3>{{ artwork.title }}</h3>
-        <p *ngIf="artwork.year">{{ artwork.year }}</p>
-        <p *ngIf="artwork.medium">{{ artwork.medium }}</p>
-        <p *ngIf="artwork.dimensions">{{ artwork.dimensions }}</p>
+        <p *ngIf="artwork.year" class="year">{{ artwork.year }}</p>
+        <p *ngIf="artwork.medium" class="medium">{{ artwork.medium }}</p>
+        <p *ngIf="artwork.dimensions" class="dimensions">{{ artwork.dimensions }}</p>
         <p *ngIf="artwork.description" class="description">{{ artwork.description }}</p>
       </div>
     </div>
