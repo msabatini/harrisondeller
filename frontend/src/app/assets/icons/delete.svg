@@ -1,0 +1,15 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Trash/Delete icon -->
+  <g>
+    <!-- Handle -->
+    <path d="M 9 3 L 9 2 h 6 v 1"/>
+    <!-- Trash can body -->
+    <rect x="3" y="5" width="18" height="14" rx="1" ry="1"/>
+    <!-- Delete lines inside -->
+    <line x1="8" y1="9" x2="8" y2="17"/>
+    <line x1="12" y1="9" x2="12" y2="17"/>
+    <line x1="16" y1="9" x2="16" y2="17"/>
+    <!-- Top separation line -->
+    <line x1="3" y1="5" x2="21" y2="5" opacity="0.4"/>
+  </g>
+</svg>
