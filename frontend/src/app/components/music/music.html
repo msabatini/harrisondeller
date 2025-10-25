@@ -11,7 +11,21 @@
 
   <div class="music-grid" *ngIf="!loading && musicList.length > 0">
     <div class="music-card" *ngFor="let music of musicList">
-      <div class="music-cover" *ngIf="music.coverImage">
+      <a 
+        [href]="getSpotifyUrl(music.spotifyUrl)" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="music-cover-link"
+        *ngIf="music.spotifyUrl">
+        <div class="music-cover" *ngIf="music.coverImage">
+          <img [src]="music.coverImage" [alt]="music.title" />
+          <div class="spotify-overlay">
+            <img src="assets/images/Spotify_icon.svg" alt="Spotify" class="spotify-icon" />
+            <span>Open in Spotify</span>
+          </div>
+        </div>
+      </a>
+      <div class="music-cover" *ngIf="!music.spotifyUrl && music.coverImage">
         <img [src]="music.coverImage" [alt]="music.title" />
       </div>
       <div class="music-info">
@@ -19,16 +33,6 @@
         <p *ngIf="music.artist" class="artist">{{ music.artist }}</p>
         <p *ngIf="music.album" class="album">{{ music.album }}</p>
         <p *ngIf="music.releaseYear" class="year">{{ music.releaseYear }}</p>
-      </div>
-      <div class="music-player" *ngIf="music.spotifyUrl">
-        <iframe 
-          [src]="getSpotifyEmbedUrl(music.spotifyUrl)" 
-          width="100%" 
-          height="80" 
-          frameborder="0" 
-          allowtransparency="true" 
-          allow="encrypted-media">
-        </iframe>
       </div>
     </div>
   </div>

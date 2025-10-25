@@ -81,8 +81,9 @@
         <circle cx="12" cy="12" r="3" fill="none"/>
       </svg>
       <mat-form-field appearance="fill" class="full-width custom-field">
-        <mat-label>Spotify URL</mat-label>
-        <input matInput [(ngModel)]="form.spotifyUrl" name="spotifyUrl" type="url">
+        <mat-label>Spotify URL or Embed Code</mat-label>
+        <input matInput [(ngModel)]="form.spotifyUrl" name="spotifyUrl">
+        <mat-hint>Paste a Spotify URL or full iframe embed code</mat-hint>
       </mat-form-field>
     </div>
 
@@ -105,10 +106,20 @@
         <circle cx="8" cy="9" r="1.5" fill="white" opacity="0.6"/>
         <path d="M 3 16 l 5 -5 l 4 4 l 8 -8" fill="none"/>
       </svg>
-      <mat-form-field appearance="fill" class="full-width custom-field">
-        <mat-label>Cover Image URL</mat-label>
-        <input matInput [(ngModel)]="form.coverImage" name="coverImage" type="url">
-      </mat-form-field>
+      <div class="cover-upload-wrapper">
+        <label class="file-upload-label">
+          <span class="upload-button-text">{{ coverImageFileName || 'Upload Cover Image' }}</span>
+          <input 
+            type="file" 
+            accept="image/*" 
+            (change)="onCoverImageSelected($event)" 
+            [disabled]="uploading"
+            class="file-input"
+          >
+        </label>
+        <div *ngIf="uploading" class="upload-status">Uploading...</div>
+        <div *ngIf="form.coverImage && !uploading" class="upload-status success">✓ Image uploaded</div>
+      </div>
     </div>
 
     <div class="toggle-group">

@@ -13,7 +13,7 @@ export class CreateMusicDto {
   @IsOptional()
   album?: string;
 
-  @IsUrl()
+  @IsString()
   @IsOptional()
   spotifyUrl?: string;
 

@@ -37,9 +37,21 @@ export class MusicComponent implements OnInit {
     });
   }
 
-  getSpotifyEmbedUrl(spotifyUrl: string): SafeResourceUrl {
-    const trackId = spotifyUrl.split('/').pop()?.split('?')[0];
-    const embedUrl = `https://open.spotify.com/embed/track/${trackId}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  getSpotifyUrl(spotifyUrl: string): string {
+    if (!spotifyUrl) {
+      return '';
+    }
+
+    // If it's already an iframe/embed URL, extract the URL
+    if (spotifyUrl.includes('<iframe')) {
+      const srcMatch = spotifyUrl.match(/src=["']([^"']+)["']/);
+      if (srcMatch && srcMatch[1]) {
+        // Extract the base URL without query parameters
+        return srcMatch[1].split('?')[0];
+      }
+    }
+
+    // Otherwise, return the URL as-is (remove query parameters)
+    return spotifyUrl.split('?')[0];
   }
 }

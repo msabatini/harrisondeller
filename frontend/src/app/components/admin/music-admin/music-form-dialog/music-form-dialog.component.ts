@@ -9,6 +9,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MusicService } from '../../../../services/music.service';
+import { UploadService } from '../../../../services/upload.service';
 import { Music, CreateMusicRequest } from '../../../../models/music.model';
 
 @Component({
@@ -44,9 +45,12 @@ export class MusicFormDialogComponent implements OnInit {
   loading = false;
   error = '';
   isEditMode = false;
+  uploading = false;
+  coverImageFileName = '';
 
   constructor(
     private musicService: MusicService,
+    private uploadService: UploadService,
     private dialogRef: MatDialogRef<MusicFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Music | null
   ) {}
@@ -65,6 +69,10 @@ export class MusicFormDialogComponent implements OnInit {
         order: this.data.order,
         published: this.data.published
       };
+      // If editing, show that an image is already uploaded
+      if (this.data.coverImage) {
+        this.coverImageFileName = '(Current image)';
+      }
     }
   }
 
@@ -96,5 +104,28 @@ export class MusicFormDialogComponent implements OnInit {
 
   onCancel(): void {
     this.dialogRef.close(false);
+  }
+
+  onCoverImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.coverImageFileName = file.name;
+      this.uploading = true;
+      this.error = '';
+
+      this.uploadService.uploadImage(file).subscribe({
+        next: (response) => {
+          this.form.coverImage = response.url;
+          this.uploading = false;
+        },
+        error: (err) => {
+          console.error('Upload error:', err);
+          this.error = 'Failed to upload cover image';
+          this.coverImageFileName = '';
+          this.uploading = false;
+        }
+      });
+    }
   }
 }
