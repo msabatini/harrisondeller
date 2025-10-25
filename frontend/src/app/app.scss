@@ -75,6 +75,7 @@ body {
   cursor: pointer;
   padding: 0;
   z-index: 1001;
+  margin-top: 2rem; 
   
   span {
     width: 30px;
@@ -122,10 +123,18 @@ body {
   }
 }
 
+/* Desktop navbar links only */
+@media (min-width: 769px) {
+  .nav-links li {
+    max-height: 13rem;
+  }
+}
+
 .nav-links a {
   color: #fff;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: 100;
   font-family: 'Red Hat Display', serif;
   transition: color 0.3s;
   display: flex;

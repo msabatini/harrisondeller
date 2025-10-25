@@ -1,6 +1,12 @@
-<div class="music-container">
-  <h1>Music</h1>
+<div class="music-hero">
+  <img src="assets/images/HDA-music-hero.jpg" alt="Music Hero" class="hero-image" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Music</h1>
+  </div>
+</div>
 
+<div class="music-container">
   <div class="loading" *ngIf="loading">Loading...</div>
 
   <div class="music-grid" *ngIf="!loading && musicList.length > 0">
