@@ -47,14 +47,25 @@
     transition: color 0.3s;
     padding: 0;
 
+    .arrow {
+      color: #e62e2e;
+      margin-right: 0.25rem;
+      font-size: 1.25rem;
+    }
+
     &:hover {
       color: #666;
+
+      .arrow {
+        color: #cc1a1a;
+      }
     }
   }
 
   .breadcrumb {
-    color: #999;
-    font-size: 0.95rem;
+    color: #1a1a1a;
+    font-size: 1.3rem;
+    font-weight: 500;
   }
 }
 

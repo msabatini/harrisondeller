@@ -14,7 +14,7 @@
   <div class="artwork-content" *ngIf="artwork && !loading">
     <!-- Header with back button -->
     <div class="detail-header">
-      <button (click)="goBack()" class="btn-back">← Back to Gallery</button>
+      <button (click)="goBack()" class="btn-back"><span class="arrow">←</span> Back to Gallery</button>
       <div class="breadcrumb" *ngIf="body">
         <span>{{ body.title }}</span>
       </div>
