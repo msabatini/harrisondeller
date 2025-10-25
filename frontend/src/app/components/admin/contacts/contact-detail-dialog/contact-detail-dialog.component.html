@@ -14,11 +14,11 @@
         <div class="email-with-copy">
           <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
           <button 
-            mat-icon-button 
+            class="icon-button copy-btn"
             (click)="copyEmail()" 
             matTooltip="Copy email"
             type="button">
-            <mat-icon>content_copy</mat-icon>
+            <img src="/assets/icons/content-copy.svg" alt="Copy email" class="inline-icon" />
           </button>
         </div>
       </div>
@@ -67,7 +67,7 @@
       </mat-form-field>
 
       <div class="reply-hint">
-        <mat-icon>info</mat-icon>
+        <img src="/assets/icons/info.svg" alt="Info" class="hint-icon" />
         <span>Reply will be sent to: {{ contact.email }}</span>
       </div>
     </div>
@@ -75,14 +75,13 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="onClose()" [disabled]="replySending">Close</button>
+  <button class="cancel-btn" (click)="onClose()" [disabled]="replySending">Close</button>
   <button 
-    mat-raised-button 
-    color="primary" 
+    class="submit-btn"
     (click)="sendReply()" 
     [disabled]="replySending || !replyMessage.trim()">
     <span *ngIf="!replySending">
-      <mat-icon>send</mat-icon> Send Reply
+      <img src="/assets/icons/send.svg" alt="Send" class="button-icon" /> Send Reply
     </span>
     <mat-spinner *ngIf="replySending" diameter="20"></mat-spinner>
   </button>

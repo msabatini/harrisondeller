@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { ContactService } from '../../../../services/contact.service';
 import { Contact } from '../../../../models/contact.model';
@@ -21,6 +22,7 @@ import { Contact } from '../../../../models/contact.model';
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTooltipModule,
     FormsModule
   ],
   templateUrl: './contact-detail-dialog.component.html',

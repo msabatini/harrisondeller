@@ -138,10 +138,11 @@
             background-color: #ffecb3;
             color: #f57f17;
 
-            .unread-icon {
-              font-size: 16px;
+            .status-icon {
               width: 16px;
               height: 16px;
+              display: block;
+              filter: invert(66%) sepia(91%) saturate(1286%) hue-rotate(33deg) brightness(103%) contrast(104%);
             }
           }
 
@@ -149,10 +150,11 @@
             background-color: #e0f2f1;
             color: #00695c;
 
-            .read-icon {
-              font-size: 16px;
+            .status-icon {
               width: 16px;
               height: 16px;
+              display: block;
+              filter: invert(42%) sepia(48%) saturate(426%) hue-rotate(125deg) brightness(103%) contrast(102%);
             }
           }
 
@@ -166,6 +168,58 @@
       .actions-cell {
         display: flex;
         gap: 8px;
+
+        .icon-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border: none;
+          background: none;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+          padding: 0;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
+
+          .action-icon {
+            width: 24px;
+            height: 24px;
+            display: block;
+          }
+
+          &.view-reply-btn {
+            color: #2196f3;
+
+            .action-icon {
+              filter: invert(33%) sepia(95%) saturate(1374%) hue-rotate(198deg) brightness(104%) contrast(103%);
+            }
+
+            &:hover {
+              background-color: rgba(33, 150, 243, 0.08);
+            }
+          }
+
+          &.delete-btn {
+            color: #f44336;
+
+            .action-icon {
+              filter: invert(44%) sepia(62%) saturate(943%) hue-rotate(356deg) brightness(105%) contrast(104%);
+            }
+
+            &:hover {
+              background-color: rgba(244, 67, 54, 0.08);
+            }
+          }
+        }
       }
 
       tr.unread-row {

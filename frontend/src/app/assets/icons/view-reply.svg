@@ -1,0 +1,11 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Message bubble -->
+  <path d="M 3 11 C 3 7.13 6.13 4 10 4 h 8 C 21.87 4 25 7.13 25 11 v 6 C 25 20.87 21.87 24 18 24 H 6 L 3 27 V 11 Z" opacity="0"/>
+  <rect x="2" y="3" width="16" height="14" rx="2" ry="2"/>
+  <!-- Text lines inside bubble -->
+  <line x1="6" y1="8" x2="14" y2="8" opacity="0.6"/>
+  <line x1="6" y1="12" x2="12" y2="12" opacity="0.6"/>
+  <!-- Arrow pointing right (reply) -->
+  <path d="M 18 10 L 22 14 L 18 18"/>
+  <line x1="22" y1="14" x2="14" y2="14"/>
+</svg>
