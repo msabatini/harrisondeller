@@ -24,9 +24,38 @@
     <p class="year" *ngIf="selectedBody.year">{{ selectedBody.year }}</p>
   </div>
 
+  <!-- View Toggle -->
+  <div class="view-toggle" *ngIf="!loading && artworks.length > 0">
+    <button 
+      [class.active]="viewMode === 'list'" 
+      (click)="toggleViewMode()"
+      class="toggle-btn list-btn"
+      title="List View"
+      aria-label="List View">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="view-icon">
+        <rect x="3" y="5" width="18" height="2" fill="currentColor" rx="1"/>
+        <rect x="3" y="11" width="18" height="2" fill="currentColor" rx="1"/>
+        <rect x="3" y="17" width="18" height="2" fill="currentColor" rx="1"/>
+      </svg>
+    </button>
+    <button 
+      [class.active]="viewMode === 'grid'" 
+      (click)="toggleViewMode()"
+      class="toggle-btn grid-btn"
+      title="Grid View"
+      aria-label="Grid View">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="view-icon">
+        <rect x="3" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.5" rx="1"/>
+        <rect x="13" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.5" rx="1"/>
+        <rect x="3" y="13" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.5" rx="1"/>
+        <rect x="13" y="13" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.5" rx="1"/>
+      </svg>
+    </button>
+  </div>
+
   <div class="loading" *ngIf="loading">Loading...</div>
 
-  <div class="artworks-grid" *ngIf="!loading && artworks.length > 0">
+  <div class="artworks-grid" [class.grid-view]="viewMode === 'grid'" *ngIf="!loading && artworks.length > 0">
     <div class="artwork-card" *ngFor="let artwork of artworks" (click)="viewArtwork(artwork._id)">
       <img [src]="artwork.imageUrl" [alt]="artwork.title" class="artwork-image" />
       <div class="artwork-info">

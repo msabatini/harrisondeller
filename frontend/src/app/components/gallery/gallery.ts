@@ -19,6 +19,7 @@ export class GalleryComponent implements OnInit {
   artworks: Artwork[] = [];
   loading = false;
   parallaxOffset = 0;
+  viewMode: 'list' | 'grid' = 'list'; // Default to list view
 
   constructor(
     private bodyService: BodyService,
@@ -83,5 +84,9 @@ export class GalleryComponent implements OnInit {
 
   viewArtwork(artworkId: string): void {
     this.router.navigate(['/gallery/artwork', artworkId]);
+  }
+
+  toggleViewMode(): void {
+    this.viewMode = this.viewMode === 'list' ? 'grid' : 'list';
   }
 }
