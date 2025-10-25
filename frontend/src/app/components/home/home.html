@@ -11,8 +11,25 @@
 <div class="home-container">
   <section class="intro">
     <p>
-      Welcome to the creative world of Harrison Deller. Explore a diverse collection 
-      of paintings and discover the musical journey of a multifaceted artist.
+      Harrison Deller acknowledges being a compulsive creator of images forged through intuition and trust in the artistic process and materials; the works do not come from preconceived concepts or ideas and are direct manifestations of the subconscious, which also applies to his poetry writing and music composition.
     </p>
+  </section>
+
+  <section class="featured-works">
+    <h2>Featured Works</h2>
+    <div class="featured-grid">
+      <div class="featured-card" *ngFor="let artwork of featuredWorks" (click)="viewArtwork(artwork._id)">
+        <img 
+          *ngIf="artwork.imageUrl" 
+          [src]="artwork.imageUrl" 
+          [alt]="artwork.title" 
+          class="featured-image" />
+        <div class="featured-placeholder" *ngIf="!artwork.imageUrl"></div>
+        <div class="featured-info">
+          <h3>{{ artwork.title }}</h3>
+          <p class="year" *ngIf="artwork.year">{{ artwork.year }}</p>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
